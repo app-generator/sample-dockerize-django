@@ -1,0 +1,15 @@
+ARG PYTHON_VERSION
+FROM python:${PYTHON_VERSION}
+RUN useradd --create-home --shell /bin/false \
+    --system --home-dir /app app;
+WORKDIR /app
+COPY --chown=app:app ./requirements.txt /app/
+RUN pip install -r /app/requirements.txt; \
+    mkdir -p /app/static; \
+    chown app:app /app/static; \
+    python -m compileall; \
+    python -m compileall .
+COPY --chown=app:app . /app/
+USER app
+EXPOSE 8000
+CMD [ "gunicorn", "--bind", "0.0.0.0:8000", "hello_world.wsgi:application" ]
