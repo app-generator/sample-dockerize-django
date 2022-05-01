@@ -2,6 +2,81 @@
 
 This is a hello world app that is written in [Python](https://www.python.org/), using [Django](https://www.djangoproject.com/) framework, packaged using [Docker](https://www.docker.com/).
 
+## Generating a Django project
+
+### Installing Python
+
+Make sure to have Python installed and its package manager, `pip`.
+
+```
+python --version
+pip --version
+```
+
+If the above command yields an error, install Python.
+
+#### Debian-based distributions (Debian, Ubuntu, etc.)
+
+```
+sudo apt install python3 python3-pip
+```
+
+#### Red Hat-based distributions (CentOS, Fedora, etc.)
+
+```
+sudo yum install python3 python3-pip
+```
+
+#### Other Linux distributions
+
+Refer to your Linux distribution's documentation for how to install Python.
+
+### Installing Django
+
+#### Create a virtual environment
+
+```
+python3 -m venv venv
+```
+
+#### Activate the virtual environment
+
+```
+source venv/bin/activate 
+```
+
+#### Install Django
+
+```
+pip install django
+```
+
+Then you can import Django in your code.
+
+```
+import django
+```
+
+### Creating a Django project
+
+```
+django-admin startproject project-name
+```
+
+## Code-base structure
+
+```
+project-name/           # The project's root directory
+├───hello_world/        # The project's app directory
+│   ├───__init__.py     # Module for the app
+│   ├───asgi.py         # ASGI entrypoint
+│   ├───settings.py     # Django settings
+│   ├───urls.py         # URL patterns
+│   └───wsgi.py         # WSGI entrypoint
+├───manage.py           # Django's management script
+└───requirements.txt    # Requirements for the project
+```
+
 ## Packaging
 
 This is packaged by using the [Python container image](https://hub.docker.com/_/python) as a base, copying the source code and installs necessary dependencies of this app and adds a startup script.
@@ -15,17 +90,19 @@ In production, [Gunicorn](https://gunicorn.org/) is used as the server, [Nginx](
 ### Development
 
 ```
-docker compose up --build
+docker-compose up db -d
+docker-compose run app python manage.py migrate
+docker-compose up --build
 ```
 
 ### Production
 
 ```
-docker compose --file docker-compose.prod.yml build
-docker compose --file docker-compose.prod.yml up db -d
-docker compose --file docker-compose.prod.yml run app python manage.py migrate
-docker compose --file docker-compose.prod.yml run app python manage.py collectstatic
-docker compose --file docker-compose.prod.yml up
+docker-compose --file docker-compose.prod.yml build
+docker-compose --file docker-compose.prod.yml up db -d
+docker-compose --file docker-compose.prod.yml run app python manage.py migrate
+docker-compose --file docker-compose.prod.yml run app python manage.py collectstatic
+docker-compose --file docker-compose.prod.yml up
 ```
 
 ## Customizing
