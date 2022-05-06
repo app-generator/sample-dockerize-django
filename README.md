@@ -105,8 +105,6 @@ In production, [Gunicorn](https://gunicorn.org/) is used as the server, [Nginx](
 ### Development
 
 ```
-docker-compose up -d db
-docker-compose run app python manage.py migrate
 docker-compose up --build
 ```
 
