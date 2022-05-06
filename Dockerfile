@@ -6,9 +6,11 @@ WORKDIR /app
 COPY --chown=app:app ./requirements.txt /app/
 RUN pip install -r /app/requirements.txt; \
     mkdir -p /app/static; \
-    chown -R app:app /app/static
+    chown -R app:app /app/static; \
+    apt update; \
+    apt install -y --no-install-recommends postgresql-client
 COPY --chown=app:app . /app/
 ENV DEBUG=True
 USER app
 EXPOSE 8000
-CMD [ "./manage.py", "runserver", "0.0.0.0:8000" ]
+CMD [ "bash", "entrypoint.sh" ]

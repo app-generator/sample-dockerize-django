@@ -10,8 +10,6 @@ This is a hello world app that is written in [Python](https://www.python.org/), 
 
 ```bash
 $ git clone repo
-$ docker-compose up -d db
-$ docker-compose run app python manage.py migrate
 $ docker-compose up --build
 ```
 
