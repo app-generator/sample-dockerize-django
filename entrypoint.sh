@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 
-# Check if database is ready
+# Check if database is ready - dummy
 while ! pg_isready -q -h ${POSTGRES_HOST:-postgres} -p ${POSTGRES_PORT:-5432} -U ${POSTGRES_USER:-postgres}; do
     echo "Waiting for database connection..."
     sleep 1
