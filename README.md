@@ -6,7 +6,7 @@ This is a hello world app that is written in [Python](https://www.python.org/), 
 
 ## ✨ Quick Start in `Docker`
 
-@Todo - the minimal set up to start the project. Something like:
+The minimal set up to start the project. Something like:
 
 ```bash
 $ git clone repo
