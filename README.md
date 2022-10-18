@@ -6,10 +6,8 @@ This is a hello world app that is written in [Python](https://www.python.org/), 
 
 ## ✨ Quick Start in `Docker`
 
-The minimal set up to start the project. Something like:
-
 ```bash
-$ git clone repo
+$ git clone https://github.com/app-generator/sample-dockerize-django.git
 $ docker-compose up --build
 ```
 
